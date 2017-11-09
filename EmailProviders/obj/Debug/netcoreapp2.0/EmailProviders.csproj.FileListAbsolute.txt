@@ -1,0 +1,10 @@
+C:\Subbu\Personal\WorkSpace\EmailProviders\EmailProviders\bin\Debug\netcoreapp2.0\EmailProviders.dll
+C:\Subbu\Personal\WorkSpace\EmailProviders\EmailProviders\bin\Debug\netcoreapp2.0\EmailProviders.deps.json
+C:\Subbu\Personal\WorkSpace\EmailProviders\EmailProviders\bin\Debug\netcoreapp2.0\EmailProviders.runtimeconfig.json
+C:\Subbu\Personal\WorkSpace\EmailProviders\EmailProviders\bin\Debug\netcoreapp2.0\EmailProviders.runtimeconfig.dev.json
+C:\Subbu\Personal\WorkSpace\EmailProviders\EmailProviders\obj\Debug\netcoreapp2.0\EmailProviders.csproj.CoreCompileInputs.cache
+C:\Subbu\Personal\WorkSpace\EmailProviders\EmailProviders\obj\Debug\netcoreapp2.0\EmailProviders.AssemblyInfoInputs.cache
+C:\Subbu\Personal\WorkSpace\EmailProviders\EmailProviders\obj\Debug\netcoreapp2.0\EmailProviders.AssemblyInfo.cs
+C:\Subbu\Personal\WorkSpace\EmailProviders\EmailProviders\obj\Debug\netcoreapp2.0\EmailProviders.dll
+C:\Subbu\Personal\WorkSpace\EmailProviders\EmailProviders\obj\Debug\netcoreapp2.0\EmailProviders.pdb
+C:\Subbu\Personal\WorkSpace\EmailProviders\EmailProviders\obj\Debug\netcoreapp2.0\EmailProviders.csprojResolveAssemblyReference.cache

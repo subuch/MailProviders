@@ -28,6 +28,7 @@ namespace EmailProviders.Helper
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
                     Convert.ToBase64String(Encoding.ASCII.GetBytes(_mailGun.ApiKey)));
+                   //_mailGun.ApiKey);
 
                 var content = new FormUrlEncodedContent(new[]
                     {

@@ -26,9 +26,8 @@ namespace EmailProviders.Helper
         public async Task<HttpResponseMessage> SendEmailAsync(Email model)
         {
             string responseData = string.Empty;
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(_mailGun.BaseUri);
+            using (var client = new HttpClient { BaseAddress = new Uri(_mailGun.BaseUri) })
+            {                
                 var content = new FormUrlEncodedContent(new[]
                     {
                     new KeyValuePair<string, string>("api_key", _mailGun.APIKey),

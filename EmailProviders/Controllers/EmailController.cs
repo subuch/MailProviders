@@ -26,50 +26,23 @@ namespace EmailProviders.Controllers
         public async Task<IActionResult> SendEmail([FromBody]Email datamodel)
         {
 
-            if (  datamodel.tos.Count()==0 || datamodel.bccs.Count() == 0 || datamodel.ccs.Count() == 0   || string.IsNullOrWhiteSpace(datamodel?.subject) || string.IsNullOrWhiteSpace(datamodel?.text))
+            if ( string.IsNullOrEmpty(datamodel.to) || string.IsNullOrEmpty(datamodel.bcc) || string.IsNullOrEmpty(datamodel.cc) || string.IsNullOrWhiteSpace(datamodel?.subject) || string.IsNullOrWhiteSpace(datamodel?.text))
             {
                 return BadRequest(DefaultConstant.BadRequestErrorMessage);
             }
-
-          
-
+            
             HttpResponseMessage responseMessage = new HttpResponseMessage();
-            string responseData = string.Empty;
-            int index = 0;
+            string responseData = string.Empty;            
             foreach (var item in _providers) //Iterating with the pool of providers
-            {
-
-                //if (isErrorThrown)
-                //{
-                //    var listWithMost = (new List<List<string>> { datamodel.tos.ToList(), datamodel.bccs.ToList(), datamodel.ccs.ToList() })
-                //               .OrderByDescending(x => x.Count())
-                //               .Take(1);
-                //}
-                //else
-                //{
-                    var listWithMost = (new List<List<string>> { datamodel.tos.ToList(), datamodel.bccs.ToList(), datamodel.ccs.ToList() })
-                                 .OrderByDescending(x => x.Count())
-                                 .Take(1);
-                //}
+            { 
+              
+              
                 try
                 {
                     IEmailProvider emailProdvider =  EmailFactory.getEmailInstance((EmailEnum)Enum.Parse(typeof(EmailEnum), item.ToString()));
-
-                    for (int i = 0; i < listWithMost.Count(); i++)
-                    {
-                        if (i >= index)
-                        {
-                            if (datamodel.tos[i] != null)
-                                datamodel.to = datamodel.tos[i].ToString();
-
-                            if (datamodel.bccs[i] != null)
-                                datamodel.bcc = datamodel.bccs[i].ToString();
-
-                            if (datamodel.ccs[i] != null)
-                                datamodel.cc = datamodel.ccs[i].ToString();
-
+                    
                             responseMessage = await emailProdvider.SendEmailAsync(datamodel);
-                            index = i;
+                    
                             if (responseMessage.StatusCode != System.Net.HttpStatusCode.OK)
                             {
                                 using (HttpContent rescontent = responseMessage.Content)
@@ -78,11 +51,9 @@ namespace EmailProviders.Controllers
                                 }                               
                                 throw new Exception(responseData);
                             }
-                           
-                        }
-                        //Return the response if email sent successfull
-                    }
-                    return Ok("Mail Sent Succefully");
+
+                        return Ok("Mail Sent Succefully"); //Return the response if email sent successfull
+                    
                 }
                 catch
                 {
@@ -94,43 +65,77 @@ namespace EmailProviders.Controllers
 
         }
 
-
-        // GET api/values
-        //[HttpGet]
-        //public IEnumerable<string> Get()
+        //[HttpPost("SendEmail")]
+        //public async Task<IActionResult> SendEmailWithArray([FromBody]Email datamodel)
         //{
-        //    return new string[] { "value1", "value2" };
+
+        //    if (datamodel.tos.ToList().Count == 0 || datamodel.bccs.ToList().Count == 0 || datamodel.ccs.ToList().Count == 0 || string.IsNullOrWhiteSpace(datamodel?.subject) || string.IsNullOrWhiteSpace(datamodel?.text))
+        //    {
+        //        return BadRequest(DefaultConstant.BadRequestErrorMessage);
+        //    }
+
+
+
+        //    HttpResponseMessage responseMessage = new HttpResponseMessage();
+        //    string responseData = string.Empty;
+        //    int index = 0;
+        //    foreach (var item in _providers) //Iterating with the pool of providers
+        //    {
+        //        var listWithMost = ((new List<List<string>> { datamodel.tos.ToList(), datamodel.bccs.ToList(), datamodel.ccs.ToList() })
+        //                           .OrderByDescending(x => x.Count())
+        //                           .Take(1)).ToList();
+
+        //        try
+        //        {
+        //            IEmailProvider emailProdvider = EmailFactory.getEmailInstance((EmailEnum)Enum.Parse(typeof(EmailEnum), item.ToString()));
+
+        //            for (int i = 0; i < listWithMost[0].Count; i++)
+        //            {
+        //                if (i >= index)
+        //                {
+        //                    if (datamodel.tos.ElementAtOrDefault(i) != null)
+        //                        datamodel.to = datamodel.tos[i].ToString();
+        //                    else
+        //                        datamodel.to = "";
+
+        //                    if (datamodel.bccs.ElementAtOrDefault(i) != null)
+        //                        datamodel.bcc = datamodel.bccs[i].ToString();
+        //                    else
+        //                        datamodel.bcc = "";
+
+
+        //                    if (datamodel.ccs.ElementAtOrDefault(i) != null)
+        //                        datamodel.cc = datamodel.ccs[i].ToString();
+        //                    else
+        //                        datamodel.cc = "";
+
+        //                    responseMessage = await emailProdvider.SendEmailAsync(datamodel);
+        //                    index = i;
+        //                    if (responseMessage.StatusCode != System.Net.HttpStatusCode.OK)
+        //                    {
+        //                        using (HttpContent rescontent = responseMessage.Content)
+        //                        {
+        //                            responseData = await rescontent.ReadAsStringAsync();
+        //                        }
+        //                        throw new Exception(responseData);
+        //                    }
+
+        //                }
+        //                //Return the response if email sent successfull
+        //            }
+        //            return Ok("Mail Sent Succefully");
+        //        }
+        //        catch
+        //        {
+        //            continue;    //pick the next provider if an error occurs with a provider
+        //        }
+        //    }
+
+        //    return NotFound(DefaultConstant.NotFoundErrorMessage);
+
         //}
 
-        //// GET api/values/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
 
-        //// POST api/values
-        //[HttpPost]
-        //public void Post([FromBody]string value)
-        //{
-        //}
-
-        //// PUT api/values/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
-
-        //// DELETE api/values/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
-
-        /// <summary>
-        /// Random list sorting
-        /// </summary>
-        /// <returns></returns>
         private IEnumerable<EmailEnum> getRandomProviders()
         {
             List<EmailEnum> email = new List<EmailEnum>();

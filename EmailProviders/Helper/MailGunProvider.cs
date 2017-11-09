@@ -23,6 +23,7 @@ namespace EmailProviders.Helper
 
         public async Task<HttpResponseMessage> SendEmailAsync(Email model)
         {
+            string responseData = string.Empty;
             using (var client = new HttpClient { BaseAddress = new Uri(_mailGun.BaseUri) })
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
@@ -42,8 +43,16 @@ namespace EmailProviders.Helper
                 });
 
                 //var stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                HttpResponseMessage response = client.PostAsync(_mailGun.RequestUri, content).Result;
+                using (HttpContent rescontent = response.Content)
+                {
+                    responseData = await rescontent.ReadAsStringAsync();
+                }
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                    throw new Exception(responseData);
+                return response;
 
-                return await client.PostAsync(_mailGun.RequestUri, content).ConfigureAwait(false);
+                //return await client.PostAsync(_mailGun.RequestUri, content).ConfigureAwait(false);
             }
         }
 

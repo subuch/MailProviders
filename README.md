@@ -14,6 +14,7 @@
  1. MailGun
  2. SendGrid
  
+ Each provider is encapsulated and isolated which enable to extend the new provider with minimal code changes.
   
 Architecture design based on the following:
  Singleton and Factory Pattern

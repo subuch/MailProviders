@@ -4,11 +4,11 @@
  On filling the required fields, the system would randomly pick a provider to send email. During the failure, the system would automatically recognize it and divert the traffic to another provider from the pool without any interruption
  
  Pool of Techniques Used:
- .NET Core 2.0
- .NET Core WebAPI 2.0 
- Angular 1.x
- Single Page Application(SPA)
- BootStrap
+ .NET Core 2.0;
+ .NET Core WebAPI 2.0 ;
+ Angular 1.x;
+ Single Page Application(SPA);
+ BootStrap;
  
  Integrated Mail provider
  1. MailGun

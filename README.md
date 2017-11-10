@@ -1,11 +1,11 @@
 # MailProviders
  This application is used to send email from the pool of MailProvider
  
- If an error occurs while sending with a provider, system would automatically recogonise it and divert the traffic to another provider from the pool.
+ On filling the required fields, the system would randomly pick a provider to send email. During the failure, the system would automatically recognize it and divert the traffic to another provider from the pool without any interruption
  
- Pool of Technique Used:
+ Pool of Techniques Used:
  .NET Core 2.0
- .NET Core WebAPI 2.0
+ .NET Core WebAPI 2.0 
  Angular 1.x
  Single Page Application(SPA)
  
@@ -15,12 +15,14 @@
  
   
 Architecture design based on the following:
- Singleton
- Factory Pattern
+ Singleton and Factory Pattern
  
- Config to modified:
+ List of task before running the app:
  
- Open the appsetting.json and modify the following with the own API Keys provided by Mailgun and SendGrid
+ 1. Create an account in SendGrid and note it down the UserId and Password
+ 2. Create an account in Mailgun and note it down the Key
+ 3. Ensure the recipients are addded in the MailGun account under the Authorized recipients section
+ 4. Open the appsetting.json(within the codebase) and modify the following with settings  provided by Mailgun and SendGrid
  
   "MailGunEmailSettings": {
     "ApiKey": "api:key-xxxx", 

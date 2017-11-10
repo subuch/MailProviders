@@ -8,6 +8,7 @@
  .NET Core WebAPI 2.0 
  Angular 1.x
  Single Page Application(SPA)
+ BootStrap
  
  Integrated Mail provider
  1. MailGun

@@ -42,8 +42,8 @@ Architecture design based on the following:
   }
 
 Info to Reviewer:
-1. App support email to multiple  recipient provided each recipient is added in To,CC and BCC
-2 It need version upgrade to integrate multiple recipient in To,CC and BCC
+1. App support sending email to multiple  recipient but can accept only one recipient added to To,CC and BCC fields
+2. It need version upgrade to integrate multiple recipient in To,CC and BCC
 
  Deployment:
       

@@ -30,7 +30,7 @@ Architecture design based on the following:
     "ApiKey": "api:key-xxxx", 
     "BaseUri": "https://api.mailgun.net/v3/",
     "RequestUri": "sandboxexxxx.mailgun.org/messages",
-    "From": "postmaster@sandboxexxxx.mailgun.org"
+    "From": "xxx@yyy.com"
   },
 
   "SendGridMailSettings": {
@@ -38,8 +38,9 @@ Architecture design based on the following:
     "APIKey": "xxxx",
     "Key": "api:key-xxxx",
     "BaseUri": "https://api.sendgrid.com/v3/mail/send"
-  
+     "From": "xxx@yyy.com"
   }
+
 
 Info to Reviewer:
 1. App support sending email to multiple  recipient but can accept only one recipient added to To,CC and BCC fields

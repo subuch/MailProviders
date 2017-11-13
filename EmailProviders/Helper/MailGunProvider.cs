@@ -32,18 +32,17 @@ namespace EmailProviders.Helper
 
                 var content = new FormUrlEncodedContent(new[]
                     {
-                    //new KeyValuePair<string, string>("api_key", _mailGun.APIKey),
-                    //new KeyValuePair<string, string>("api_user", _mailGun.APIUser),
-                    new KeyValuePair<string, string>("from", _mailGun.From),
-                    new KeyValuePair<string, string>("to", model.to),
-                    new KeyValuePair<string, string>("bcc", model.bcc),
-                    new KeyValuePair<string, string>("cc", model.cc),
-                    new KeyValuePair<string, string>("subject", model.subject),
-                    new KeyValuePair<string,string>("text", model.text)
+                    
+                   new KeyValuePair<string, string>("from", _mailGun.From),
+
+                    !string.IsNullOrEmpty(model.to)? new KeyValuePair<string, string>("to", model.to):new KeyValuePair<string, string>(),
+                    !string.IsNullOrEmpty(model.bcc)?  new KeyValuePair<string, string>("bcc", model.bcc):new KeyValuePair<string, string>(),
+                    !string.IsNullOrEmpty(model.cc)? new KeyValuePair<string, string>("cc", model.cc):new KeyValuePair<string, string>(),
+                    !string.IsNullOrEmpty(model.subject)? new KeyValuePair<string, string>("subject", model.subject):new KeyValuePair<string, string>(),
+                    !string.IsNullOrEmpty(model.text) ?  new KeyValuePair<string,string>("text", model.text):new KeyValuePair<string, string>(),
+                   // !string.IsNullOrEmpty(model.bcc) || !string.IsNullOrEmpty(model.cc) ?  new KeyValuePair<string, string>("message", model.text):new KeyValuePair<string, string>(),
 
                 });
-
-                //var stringContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PostAsync(_mailGun.RequestUri, content).Result;
                 using (HttpContent rescontent = response.Content)
                 {
@@ -53,33 +52,9 @@ namespace EmailProviders.Helper
                     throw new Exception(responseData);
                 return response;
 
-                //return await client.PostAsync(_mailGun.RequestUri, content).ConfigureAwait(false);
             }
         }
 
-        //public async Task<HttpResponseMessage> SendEmailAsync(Email model)
-        //{
-        //    var client = new HttpClient();
-        //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(UTF8Encoding.UTF8.GetBytes("api" + ":" + API_KEY)));
-
-
-        //    var form = new Dictionary<string, string>();
-        //    form["from"] = "from@example.com";
-        //    form["to"] = "to@example.org";
-        //    form["subject"] = "Test";
-        //    form["text"] = "testing testing...";
-
-        //    var response = await client.PostAsync("https://api.mailgun.net/v2/" + DOMAIN + "/messages", new FormUrlEncodedContent(form));
-
-        //    if (response.StatusCode == HttpStatusCode.OK)
-        //    {
-        //        Debug.WriteLine("Success");
-        //    }
-        //    else
-        //    {
-        //        Debug.WriteLine("StatusCode: " + response.StatusCode);
-        //        Debug.WriteLine("ReasonPhrase: " + response.ReasonPhrase);
-        //    }
-        //}
+      
     }
 }

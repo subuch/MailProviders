@@ -3,16 +3,10 @@
 
 
 var module = angular.module("moduleregistration", ["ngRoute"]);
-
+var serverURL = 'http://localhost:16185/api/'
 /********************Registration************************/
 module.controller("MailInfoCtrl", mailCtrl);
 module.controller("SendMailCtrl", sendCtrl);
-/*******************Utility************************/
-//module.directive("myCustomDirective", function () {
-//    return {
-//        templateUrl: "templates/CustomDirectivetemplate.html"
-//    }
-//});
 
 
 module.config(function ($routeProvider, $locationProvider) {
@@ -31,7 +25,7 @@ module.config(function ($routeProvider, $locationProvider) {
             templateUrl: "templates/Mail.html",
             controller: "MailInfoCtrl"
         })
-    // $locationProvider.html5Mode(true);
+
     $locationProvider.hashPrefix('');
 
 });

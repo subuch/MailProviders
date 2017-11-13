@@ -32,12 +32,12 @@ namespace EmailProviders.Helper
                     {
                     new KeyValuePair<string, string>("api_key", _mailGun.APIKey),
                     new KeyValuePair<string, string>("api_user", _mailGun.APIUser),
-                    new KeyValuePair<string, string>("from", model.From),
-                    new KeyValuePair<string, string>("to", model.to),
-                     new KeyValuePair<string, string>("bcc", model.bcc),
-                    new KeyValuePair<string, string>("cc", model.cc),
-                    new KeyValuePair<string, string>("subject", model.subject),
-                    new KeyValuePair<string,string>("text", model.text)
+                     new KeyValuePair<string, string>("from", _mailGun.From),
+                    !string.IsNullOrEmpty(model.to)? new KeyValuePair<string, string>("to", model.to):new KeyValuePair<string, string>(),
+                    !string.IsNullOrEmpty(model.bcc)?  new KeyValuePair<string, string>("bcc", model.bcc):new KeyValuePair<string, string>(),
+                    !string.IsNullOrEmpty(model.cc)? new KeyValuePair<string, string>("cc", model.cc):new KeyValuePair<string, string>(),
+                    !string.IsNullOrEmpty(model.subject)? new KeyValuePair<string, string>("subject", model.subject):new KeyValuePair<string, string>(),
+                    !string.IsNullOrEmpty(model.text) ?  new KeyValuePair<string,string>("text", model.text):new KeyValuePair<string, string>(),
 
                 });
                 HttpResponseMessage response =  client.PostAsync("/api/mail.send.json", content).Result;

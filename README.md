@@ -44,3 +44,7 @@ Architecture design based on the following:
 Info to Reviewer:
 1. App support email to multiple  recipient provided each recipient is added in To,CC and BCC
 2 It need version upgrade to integrate multiple recipient in To,CC and BCC
+
+ Deployment:
+      
+  USe API Apps feature of Azure to host the WebAPI and HTML/JS can be hosted in any IIS based Server either on-premises or Cloud
